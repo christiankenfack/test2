@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./form.js" type="module" defer></script>
+    <link rel="stylesheet" href="form.css">
+    <title>Formulaire</title>
+</head>
+
+<body>
+    <form>
+        <div class="container">
+            <div class="contact-box">
+                <div class="cleft"></div>
+                <div class="cright">
+                    <h2>COMMANDER</h2>
+                    <input type="text" class="field" placeholder="your name & your surname" required>
+                    <span id="prenom_manquant"></span><br>
+                    <input type="email" class="field" placeholder="your adress" required>
+                    <input type="tel" class="field" placeholder="your phone" required>
+                    <div class="serveur">
+                        <input type="radio" class="bout" id="RDV" name="RDV" value="prendre rendez-vous!">
+                        <laber for="RDV">Prendre rendez-vous!</laber><br>
+                        <input type="radio" class="bout1" id="online" name="RDV" value="Discuter en ligne">
+                        <laber for="online"> Dicsuter via whatsap</laber>
+                        <button id="btn">SEND</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+<script>
+    const form = document.querySelector('form'); // sélectionne le formulaire
+    const inputs = Array.from(form.querySelectorAll('input, select, textarea')); // sélectionne tous les champs de saisie et les convertit en tableau
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // empêche l'envoi du formulaire
+
+        let formIsValid = true;
+
+        // Vérifie chaque champ de saisie
+        inputs.forEach(function (input) {
+            if (input.required && !input.value) {
+                formIsValid = false;
+                input.classList.add('error'); // ajoute une classe d'erreur au champ de saisie
+            } else {
+                input.classList.remove('error'); // supprime la classe d'erreur du champ de saisie
+            }
+        });
+
+        if (formIsValid) {
+            // envoie le formulaire
+            form.submit();
+        } else {
+            // affiche un message d'erreur
+            alert('Veuillez remplir tous les champs obligatoires.');
+        }
+    });
+</script>
+
+</html>
